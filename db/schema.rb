@@ -18,10 +18,10 @@ ActiveRecord::Schema.define(version: 2020_04_14_160028) do
   create_table "articles", force: :cascade do |t|
     t.integer "user_id"
     t.text "content"
-    t.string "image_name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "title"
+    t.string "image"
   end
 
   create_table "comments", force: :cascade do |t|
