@@ -16,7 +16,7 @@ class ArticleController < ApplicationController
       title: params[:title],
       content: params[:content],
     )
-    
+
     if params[:image]
       @article.image = params[:image]
       # image = params[:image]

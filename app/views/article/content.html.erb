@@ -1,7 +1,7 @@
 <div>
   <h2>記事タイトル：<%= @article.title %></h2>
   <% if @article.image %>
-    <img src="<%= #{@article.image.url} %>">
+    <img src="<%= @article.image.url %>">
   <% else %>
     <img src="", alt="NoImage">
   <% end %>
