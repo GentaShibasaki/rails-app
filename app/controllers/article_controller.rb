@@ -18,9 +18,9 @@ class ArticleController < ApplicationController
     )
     
     if params[:image]
-      @article.image_name = params[:image].original_filename
-      image = params[:image]
-      File.binwrite("public/article_images/#{@article.image_name}", image.read)
+      @article.image_name = params[:image]
+      # image = params[:image]
+      # File.binwrite("public/article_images/#{@article.image_name}", image.read)
     end
 
     if @article.save
@@ -48,7 +48,7 @@ class ArticleController < ApplicationController
     if params[:image_name] && @article.image_name != params[:image_name]
       @article.image_name = params[:image].original_filename
       image = params[:image]
-      File.binwrite("public/article_images/#{@article.image_name}", image.read)
+      File.binwricte("public/article_images/#{@article.image_name}", image.read)
     end
 
     if @article.save
