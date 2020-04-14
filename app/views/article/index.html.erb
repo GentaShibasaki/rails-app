@@ -1,0 +1,10 @@
+<div>
+  <p>記事一覧</p>
+  <ul>
+  <% @articles.each do |article| %>
+    <li><%= link_to(article.title, "/article/#{article.id}") %></li>
+  <% end %>
+  </ul>
+  <%= link_to("記事作成", "/article/create") %> 
+  <%= link_to("ログアウト", "/logout", {method: :post}) %>
+</div>

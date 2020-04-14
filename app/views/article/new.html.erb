@@ -1,0 +1,16 @@
+<div>
+  <% @article.errors.full_messages.each do |message| %>
+    <%= message %>
+  <% end %>
+
+  <%= form_tag("/article/create", {multipart: true}) do %>
+    <p>タイトル</p>
+    <input name="title" value="<%= @article.title %>">
+    <p>記事内容</p>
+    <textarea name="content"><%= @article.content  %></textarea>
+    <p>画像</p>
+    <input name="image" type="file">
+    <input type="submit" value="投稿">
+  <% end %>
+  <%= link_to("戻る", "/article/index") %>
+</div>

@@ -1,3 +1,20 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  root "user#top"
+  get "article/index"
+  get "/" => "user#initial"
+  get "login" => "user#top"
+  get "signup" => "user#new"
+  
+  post "signup" => "user#create"
+  post "login" => "user#login"
+  post "logout" => "user#logout"
+
+  get "article/index" => "article#index"
+  get "article/create" => "article#new"
+  get "article/:article_id" => "article#content"
+  get "article/:article_id/edit" => "article#edit"
+
+  post "article/create" => "article#create"
+  post "article/:article_id/edit" => "article#modify"
+  post "article/:article_id" => "article#comment"
 end
