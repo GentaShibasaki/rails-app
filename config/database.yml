@@ -12,7 +12,6 @@ default: &default
   password: <%= ENV.fetch("DATABASE_PASSWORD") %>
   host: <%= ENV.fetch("DATABASE_HOST") %>
   port: <%= ENV.fetch("DATABASE_PORT") %>
-  
   timeout: 5000
 
 development:
@@ -28,4 +27,5 @@ test:
 
 production:
   <<: *default
+  url: <%= ENV.fetch('DATABASE_URL') %>
   database: <%= ENV.fetch("DATABASE_NAME_PRODUCTION") %>
