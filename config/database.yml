@@ -12,6 +12,7 @@ default: &default
   password: <%= ENV.fetch("DATABASE_PASSWORD") %>
   host: <%= ENV.fetch("DATABASE_HOST") %>
   port: <%= ENV.fetch("DATABASE_PORT") %>
+  
   timeout: 5000
 
 development:
