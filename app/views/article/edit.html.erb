@@ -24,6 +24,7 @@
       <p>コメント</p>
       <textarea name="comment"><%= @comment.comment  %></textarea>
       <input type="submit" value="編集">
+      <br>
       <%= link_to("戻る", "/article/#{@comment.article_id}") %>
     <% end %>
   <% end %>

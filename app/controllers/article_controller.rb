@@ -19,8 +19,6 @@ class ArticleController < ApplicationController
 
     if params[:image]
       @article.image = params[:image]
-      # image = params[:image]
-      # File.binwrite("public/article_images/#{@article.image}", image.read)
     end
 
     if @article.save
