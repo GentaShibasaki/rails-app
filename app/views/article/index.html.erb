@@ -1,7 +1,7 @@
 <div>
   <p>記事一覧</p>
   <ul>
-  <% @articles.each do |article| %w>
+  <% @articles.each do |article| %>
     <li><%= link_to(article.title, "/article/#{article.id}") %></li>
   <% end %>
   </ul>
