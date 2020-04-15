@@ -18,12 +18,14 @@
       <input name="image" type="file">
       <input type="submit" value="編集">
     <% end %>
+    <%= link_to("戻る", "/article/index") %>
   <% else %>
     <%= form_tag("/comment/#{@comment.id}/edit", {multipart: true}) do %>
       <p>コメント</p>
       <textarea name="comment"><%= @comment.comment  %></textarea>
       <input type="submit" value="編集">
+      <%= link_to("戻る", "/article/#{@comment.article_id}") %>
     <% end %>
   <% end %>
-  <%= link_to("戻る", "/article/index") %>
+  
 </div>
