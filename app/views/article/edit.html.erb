@@ -2,15 +2,22 @@
   <% @article.errors.full_messages.each do |message| %>
     <%= message %>
   <% end %>
-
-  <%= form_tag("/article/#{@article.id}/edit", {multipart: true}) do %>
-    <p>タイトル</p>
-    <input name="title" value="<%= @article.title %>">
-    <p>記事内容</p>
-    <textarea name="content"><%= @article.content  %></textarea>
-    <p>画像</p>
-    <input name="image" type="file">
-    <input type="submit" value="編集">
+  <% if @article %>
+    <%= form_tag("/article/#{@article.id}/edit", {multipart: true}) do %>
+      <p>タイトル</p>
+      <input name="title" value="<%= @article.title %>">
+      <p>記事内容</p>
+      <textarea name="content"><%= @article.content  %></textarea>
+      <p>画像</p>
+      <input name="image" type="file">
+      <input type="submit" value="編集">
+    <% end %>
+  <% else %>
+    <%= form_tag("/comment/#{@comment.id}/edit", {multipart: true}) do %>
+      <p>コメント</p>
+      <textarea name="comment"><%= @comment.comment  %></textarea>
+      <input type="submit" value="編集">
+    <% end %>
   <% end %>
   <%= link_to("戻る", "/article/index") %>
 </div>

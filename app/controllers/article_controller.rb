@@ -38,7 +38,11 @@ class ArticleController < ApplicationController
   end
 
   def edit
-    @article = Article.find_by(id: params[:article_id])
+    if params[:article_id]
+      @article = Article.find_by(id: params[:article_id])
+    else
+      @comment = Comment.find_by(id: params[:comment_id])
+    end
   end
 
   def modify
@@ -73,6 +77,25 @@ class ArticleController < ApplicationController
       @comments = Comment.where(article_id: @article.id)
       render("article/content")
     end
+  end
+
+  def comment_modify
+    @comment = Comment.find_by(id: params[:comment_id])
+    @comment.comment = params[:comment]
+
+    if @comment.save
+      flash[:notice] = "コメントを修正しました"
+      redirect_to("/article/#{@comment.article_id}")
+    else
+      render("article/edit")
+    end
+  end
+
+  def comment_destroy
+    @comment = Comment.find_by(id: params[:comment_id])
+    @article = Article.find_by(id: @comment.article_id)
+    @comment.destroy
+    redirect_to("/article/#{@article.id}")
   end
 
   def user_check
