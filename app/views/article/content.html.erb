@@ -28,7 +28,7 @@
     <p>ユーザ名：<%= comment.user_name %></p>
     <p>コメント内容：<%= comment.comment %></p>
     <p>投稿日時：<%= comment.created_at.strftime('%Y/%m/%d %H:%M') %></p>
-    <%= link_to("記事編集", "/comment/#{comment.id}/edit" %>
+    <%= link_to("記事編集", "/comment/#{comment.id}/edit") %>
     <%= link_to("記事削除", "/comment/#{comment.id}/destroy", {method: :post}) %>
   <% end %>
 </div>  

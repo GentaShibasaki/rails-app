@@ -99,8 +99,12 @@ class ArticleController < ApplicationController
   end
 
   def user_check
-    @article = Article.find_by(id: params[:article_id])
-    if @current_user.id != @article.user_id
+    if params[:article_id]
+      @check = Article.find_by(id: params[:article_id])
+    else
+      @check = Comment.find_by(id: params[:comment_id])
+    end
+    if @current_user.id != @check.user_id
       flash[:notice] = "該当記事の編集権限がありません"
       redirect_to("/article/#{@article.id}")
     end

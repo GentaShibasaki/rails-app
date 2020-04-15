@@ -1,6 +1,12 @@
 <div>
-  <% @article.errors.full_messages.each do |message| %>
-    <%= message %>
+  <% if @article %>
+    <% @article.errors.full_messages.each do |message| %>
+      <%= message %>
+    <% end %>
+  <% else %>
+    <% @comment.errors.full_messages.each do |message| %>
+      <%= message %>
+    <% end %>
   <% end %>
   <% if @article %>
     <%= form_tag("/article/#{@article.id}/edit", {multipart: true}) do %>
