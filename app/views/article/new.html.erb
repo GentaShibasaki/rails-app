@@ -1,6 +1,7 @@
 <div>
   <% @article.errors.full_messages.each do |message| %>
     <%= message %>
+    <br>
   <% end %>
 
   <%= form_tag("/article/create", {multipart: true}) do %>

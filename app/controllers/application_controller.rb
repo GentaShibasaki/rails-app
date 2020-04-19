@@ -1,5 +1,11 @@
 class ApplicationController < ActionController::Base
 
+
+  def clear_flash
+    flash[:notice]=nil
+    flash[:error]=nil
+  end
+
   def authenticate_user
     if session[:user_id] == nil
       flash[:notice] = "ログインが必要です"

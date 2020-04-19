@@ -2,10 +2,12 @@
   <% if @article %>
     <% @article.errors.full_messages.each do |message| %>
       <%= message %>
+      <br>
     <% end %>
   <% else %>
     <% @comment.errors.full_messages.each do |message| %>
       <%= message %>
+      <br>
     <% end %>
   <% end %>
   <% if @article %>
@@ -18,7 +20,7 @@
       <input name="image" type="file">
       <input type="submit" value="編集">
     <% end %>
-    <%= link_to("戻る", "/article/index") %>
+    <%= link_to("戻る", "/article/#{@article.id}") %>
   <% else %>
     <%= form_tag("/comment/#{@comment.id}/edit", {multipart: true}) do %>
       <p>コメント</p>
