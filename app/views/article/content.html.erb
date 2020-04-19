@@ -1,18 +1,18 @@
 <div>
   <h2>記事タイトル：<%= @article.title %></h2>
-  <% if @article.image %>
-    <img src="<%= @article.image.url %>">
-  <% else %>
-    <img src="", alt="NoImage">
-  <% end %>
-  <br>
   <h3>記事内容</h3>
   <%= @article.content %>
+  <h3>記事イメージ</h3>
+  <% if @article.image.url %>
+    <%= image_tag @article.image.url, size: "100x100" %>
+  <% else %>
+    <%= image_tag "noimage.jpg" , size: "100x100" %>
+  <% end %>
 
   <p>投稿日：<%= @article.created_at.strftime('%Y/%m/%d') %></p>
   <p>投稿ユーザ名：<%= @user.name %></p>
 
-  <% if @current_user.id == @article.user_id %>
+  <% if session[:user_id] == @article.user_id %>
     <%= link_to("編集", "/article/#{@article.id}/edit") %>
   <% end %>
 
@@ -25,10 +25,10 @@
   <% end %>
   <% @comments.each do |comment| %>
     <hr>
-    <p>ユーザ名：<%= comment.user_name %></p>
+    <p>ユーザ名：<%= comment.user.name %></p>
     <p>コメント内容：<%= comment.comment %></p>
     <p>投稿日時：<%= comment.created_at.strftime('%Y/%m/%d %H:%M') %></p>
-    <% if @current_user.id == comment.user_id %>
+    <% if session[:user_id] == comment.user_id %>
       <%= link_to("記事編集", "/comment/#{comment.id}/edit") %>
       <%= link_to("記事削除", "/comment/#{comment.id}/destroy", {method: :post}) %>
     <% end %>

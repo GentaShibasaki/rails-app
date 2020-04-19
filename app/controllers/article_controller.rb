@@ -1,6 +1,7 @@
 class ArticleController < ApplicationController
   before_action :authenticate_user
   before_action :user_check, {only:[:edit]}
+
   def index
     @articles = Article.all
   end
@@ -11,12 +12,12 @@ class ArticleController < ApplicationController
   end
 
   def create
-    @article = Article.new(
-      user_id: @current_user.id,
+    @user = User.find_by(id: session[:user_id])
+
+    @article = @user.articles.new(
       title: params[:title],
       content: params[:content],
     )
-
     if params[:image]
       @article.image = params[:image]
     end
@@ -31,8 +32,8 @@ class ArticleController < ApplicationController
 
   def content
     @article = Article.find_by(id: params[:article_id])
-    @user = User.find_by(id: @article.user_id)
-    @comments = Comment.where(article_id: @article.id)
+    @user = @article.user
+    @comments   = @article.comments
   end
 
   def edit
@@ -61,18 +62,16 @@ class ArticleController < ApplicationController
 
   def comment
     @article = Article.find_by(id: params[:article_id])
-    @user = User.find_by(id: @article.user_id)
-    @comment = Comment.new(
-      user_id: @current_user.id,
-      user_name: @current_user.name,
-      article_id: params[:article_id],
+    @user = User.find_by(id: session[:user_id])
+    @comment = @article.comments.new(
+      user_id: @user.id,
       comment: params[:comment]
     )   
     if @comment.save
-      @comments = Comment.where(article_id: @article.id)
+      @comments = @article.comments
       redirect_to("/article/#{@article.id}")
     else
-      @comments = Comment.where(article_id: @article.id)
+      @comments = @article.comments
       render("article/content")
     end
   end
@@ -91,7 +90,7 @@ class ArticleController < ApplicationController
 
   def comment_destroy
     @comment = Comment.find_by(id: params[:comment_id])
-    @article = Article.find_by(id: @comment.article_id)
+    @article = @comment.article
     @comment.destroy
     redirect_to("/article/#{@article.id}")
   end
@@ -102,7 +101,7 @@ class ArticleController < ApplicationController
     else
       @check = Comment.find_by(id: params[:comment_id])
     end
-    if @current_user.id != @check.user_id
+    if session[:user_id] != @check.user_id
       flash[:notice] = "該当記事の編集権限がありません"
       redirect_to("/article/#{@article.id}")
     end

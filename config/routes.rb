@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
-  root "user#top"
-  get "article/index"
-  get "/" => "user#initial"
+  root "user#initial"
+  get "" => "user#initial"
   get "login" => "user#top"
   get "signup" => "user#new"
   

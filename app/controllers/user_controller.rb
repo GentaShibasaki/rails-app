@@ -1,9 +1,11 @@
 class UserController < ApplicationController
+  before_action :forbid_login_user, {only:[:top]}
   def initial
     redirect_to("/login")
   end
 
   def top
+
   end
 
   def new
